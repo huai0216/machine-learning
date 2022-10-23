@@ -1,6 +1,7 @@
 import csv
 import ipywidgets as widgets
 from IPython.display import display, clear_output
+#option of administration area
 sarea_dic = {
     '新店區':0,
     '汐止區':1,
@@ -22,12 +23,14 @@ sarea_dic = {
     '深坑區':17,
     '八里區':18
 }
+#option for search
 show_dic = {
     '所有站點':0,
     '有車可借的站點':1,
     '無車可借的站點':2,
 
 }
+#make dropdown
 ad_drop = widgets.Dropdown(
     options = sarea_dic.keys(),
     value = '新店區',
@@ -40,6 +43,7 @@ show_drop = widgets.Dropdown(
     description = "請幫我顯示",
     disabled = False
 )
+#options
 snum = widgets.Checkbox(
     #value = True,
     description = "編號",
@@ -99,8 +103,10 @@ act = widgets.Checkbox(
     description = "全站禁用狀態",
     disabled = False    
 )
+#set button
 button_search = widgets.Button(description = "查詢")
 out = widgets.Output()
+#排版
 col1 = widgets.VBox([ar,tot,sbi,bemp])
 col2 = widgets.VBox([act,mday,lat,lng])
 col3 = widgets.VBox([snaen,aren])
@@ -110,6 +116,7 @@ ubike = widgets.Tab([choose, check])
 #ubike = widgets.VBox([choose,check,button_search])
 ubike.set_title(0,"我想要查詢")
 ubike.set_title(1,"我還想要看")
+#define button
 def on_button_search_clicked(b):
   with out:
     clear_output()
