@@ -79,10 +79,10 @@ ar = widgets.Checkbox(
     description = "位址",
     disabled = False
 )
-sareaen = widgets.Checkbox(
-    description = "Administrative area",
-    disabled = False
-)
+# sareaen = widgets.Checkbox(
+#     description = "Administrative area",
+#     disabled = False
+# )
 snaen = widgets.Checkbox(
     description = "site name",
     disabled = False
@@ -103,7 +103,7 @@ button_search = widgets.Button(description = "查詢")
 out = widgets.Output()
 col1 = widgets.VBox([ar,tot,sbi,bemp])
 col2 = widgets.VBox([act,mday,lat,lng])
-col3 = widgets.VBox([sareaen,snaen,aren])
+col3 = widgets.VBox([snaen,aren])
 choose = widgets.HBox([ad_drop, show_drop])
 check = widgets.HBox([col1,col2,col3,button_search])
 ubike = widgets.Tab([choose, check])
@@ -132,7 +132,30 @@ def on_button_search_clicked(b):
       x.append(12)
       num_show += 1
       print('_空位數量',end='')
-
+    if(act.value == 1):
+      x.append(13)
+      num_show += 1
+      print('_全站禁用狀態',end = '')
+    if(mday.value == 1):
+      x.append(5)
+      num_show += 1
+      print('_資料更新時間', end = '')
+    if(lat.value == 1):
+      x.append(6)
+      num_show += 1
+      print('_經度', end = '')
+    if(lng.value == 1):
+      x.append(7)
+      num_show += 1
+      print('_緯度', end = '')
+    if(snaen.value == 1):
+      x.append(10)
+      num_show += 1
+      print('_site name', end = '')
+    if(aren.value == 1):
+      x.append(11)
+      num_show += 1
+      print('_address', end = '')
 
     with open('ntpc_youbike.csv','r',encoding = 'utf8') as csvfile:
       plots = csv.reader(csvfile, delimiter=',')
@@ -144,27 +167,36 @@ def on_button_search_clicked(b):
           
             if(show_drop.value == "所有站點"):
               print(row[0]+"_"+row[1],end='')
-              for i in range(num_show):
-                print("_"+row[int(x[i])],end = '')
-                count += 1
-                if count == num_show:
-                  print('\n')
+              if(num_show == 0):
+                print('\n')
+              else :
+                for i in range(num_show):
+                  print("_"+row[int(x[i])],end = '')
+                  count += 1
+                  if count == num_show:
+                    print('\n')
             elif(show_drop.value == "有車可借的站點"):
               if(str(row[3])!='0'):
                 print(row[0]+"_"+row[1],end='')
-                for i in range(num_show):
-                  print('_'+row[int(x[i])],end = '')
-                  count += 1
-                  if count == num_show:
-                    print('\n')
+                if(num_show == 0):  
+                  print('\n')
+                else :
+                  for i in range(num_show):
+                    print('_'+row[int(x[i])],end = '')
+                    count += 1
+                    if count == num_show:
+                      print('\n')
             elif(show_drop.value == "無車可借的站點"):
               if(str(row[3])=='0'):
                 print(row[0]+"_"+row[1],end='')
-                for i in range(num_show):
-                  print('_'+row[int(x[i])],end = '')
-                  count += 1
-                  if count == num_show:
-                    print('\n')
+                if(num_show == 0):
+                  print('\n')
+                else :  
+                  for i in range(num_show):
+                    print('_'+row[int(x[i])],end = '')
+                    count += 1
+                    if count == num_show:
+                      print('\n')
 
 button_search.on_click(on_button_search_clicked)
 display(ubike)
