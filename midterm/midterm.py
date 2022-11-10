@@ -10,16 +10,7 @@ import folium
 from IPython.display import display, clear_output
 import time
 
-# def Missing_Counts( Data, NoMissing=True ) : 
-#     missing = Data.isnull().sum()  
-    
-#     if NoMissing==False :
-#         missing = missing[ missing>0 ]
-        
-#     missing.sort_values( ascending=False, inplace=True )  
-#     Missing_Count = pd.DataFrame( { 'Column Name':missing.index, 'Missing Count':missing.values } ) 
-#     Missing_Count[ 'Percentage(%)' ] = Missing_Count['Missing Count'].apply( lambda x: '{:.2%}'.format(x/Data.shape[0] ))
-#     return  Missing_Count
+
 #read data
 data = pd.read_csv('NPA_TD1.csv')
 city_list = []
